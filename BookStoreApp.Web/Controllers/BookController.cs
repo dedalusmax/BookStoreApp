@@ -1,30 +1,26 @@
-﻿using BookStoreApp.Domain.Interfaces;
-using BookStoreApp.Domain.Models;
+﻿using BookStoreApp.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreApp.Web.Controllers;
 
 public class BookController : Controller
 {
-    private readonly IBookRepository _repository;
-
-    public BookController(IBookRepository repository)
-    {
-        if (repository == null) throw new ArgumentNullException(nameof(repository));
-
-        _repository = repository;
-    }
-
     // GET: Book
     public ActionResult Index()
     {
-        return View(_repository.GetAllBooks());
+        var items = new List<Book>
+        {
+            new() { Id = 1, Name = "Gospodar prstenova" },
+            new() { Id = 2, Name = "Hobbit", IsBorrowed = true, DateTimeBorrowed = DateTime.Today }
+        };
+
+        return View(items);
     }
 
     // GET: Book/Details/5
     public ActionResult Details(int id)
     {
-        return View(_repository.GetBookById(id));
+        return View();
     }
 
     // GET: Book/Create
@@ -36,12 +32,10 @@ public class BookController : Controller
     // POST: Book/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Create(Book model)
+    public ActionResult Create(IFormCollection collection)
     {
         try
         {
-            _repository.AddBook(model);
-
             return RedirectToAction(nameof(Index));
         }
         catch
@@ -59,12 +53,10 @@ public class BookController : Controller
     // POST: Book/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Edit(int id, Book model)
+    public ActionResult Edit(int id, IFormCollection collection)
     {
         try
         {
-            _repository.UpdateBook(model);
-
             return RedirectToAction(nameof(Index));
         }
         catch
@@ -82,12 +74,10 @@ public class BookController : Controller
     // POST: Book/Delete/5
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Delete(int id, Book model)
+    public ActionResult Delete(int id, IFormCollection collection)
     {
         try
         {
-            _repository.DeleteBook(id);
-
             return RedirectToAction(nameof(Index));
         }
         catch

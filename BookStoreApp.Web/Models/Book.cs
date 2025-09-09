@@ -14,7 +14,4 @@ public class Book
 
     [DisplayName("Datum posudbe")]
     public DateTime? DateTimeBorrowed { get; set; }
-
-    [DisplayName("Autor")]
-    public Author Author { get; set; }
 }

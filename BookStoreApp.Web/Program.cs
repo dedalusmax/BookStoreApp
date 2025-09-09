@@ -1,12 +1,7 @@
-using BookStoreApp.Data;
-using BookStoreApp.Domain.Interfaces;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 var app = builder.Build();
 
