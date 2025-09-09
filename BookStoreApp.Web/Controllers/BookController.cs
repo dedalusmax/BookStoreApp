@@ -1,4 +1,4 @@
-﻿using BookStoreApp.Domain.Models;
+﻿using BookStoreApp.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreApp.Web.Controllers;

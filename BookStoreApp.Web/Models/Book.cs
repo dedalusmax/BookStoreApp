@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace BookStoreApp.Domain.Models;
+namespace BookStoreApp.Web.Models;
 
 public class Book
 {
