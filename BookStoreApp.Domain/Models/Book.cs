@@ -1,8 +1,9 @@
-﻿using System.ComponentModel;
+﻿using BookStoreApp.Domain.Interfaces;
+using System.ComponentModel;
 
 namespace BookStoreApp.Domain.Models;
 
-public class Book
+public class Book : IEntity
 {
     public int Id { get; set; }
 

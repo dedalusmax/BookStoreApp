@@ -1,6 +1,6 @@
 ﻿namespace BookStoreApp.Domain.Interfaces;
 
-public interface IRepository<T> where T : class
+public interface IRepository<T> where T : class, IEntity
 {
     List<T> GetAll();
 

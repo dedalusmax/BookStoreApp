@@ -1,6 +1,8 @@
-﻿namespace BookStoreApp.Domain.Models;
+﻿using BookStoreApp.Domain.Interfaces;
 
-public class Genre
+namespace BookStoreApp.Domain.Models;
+
+public class Genre : IEntity
 {
     public int Id { get; set; }
 
