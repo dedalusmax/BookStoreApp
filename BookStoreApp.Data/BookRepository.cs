@@ -21,22 +21,22 @@ public class BookRepository : IBookRepository
         }
     }
 
-    public List<Book> GetAllBooks()
+    public List<Book> GetAll()
     {
         return _books!;
     }
 
-    public Book? GetBookById(int id)
+    public Book? GetById(int id)
     {
         return _books!.SingleOrDefault(x => x.Id == id);
     }
 
-    public void AddBook(Book book)
+    public void Add(Book book)
     {
         _books!.Add(book);
     }
 
-    public void UpdateBook(Book book)
+    public void Update(Book book)
     {
         var data = _books!.SingleOrDefault(x => x.Id == book.Id);
         if (data != null)
@@ -48,7 +48,7 @@ public class BookRepository : IBookRepository
         }
     }
 
-    public void DeleteBook(int id)
+    public void Delete(int id)
     {
         var data = _books!.SingleOrDefault(x => x.Id == id);
         if (data != null)
@@ -56,4 +56,23 @@ public class BookRepository : IBookRepository
             _books!.Remove(data);
         }
     }
+
+    #region Custom methods
+
+    public void Borrow(Book book)
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<Book> GetAvailableBooks()
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<Book> GetTopSellingBooks()
+    {
+        throw new NotImplementedException();
+    }
+
+    #endregion
 }

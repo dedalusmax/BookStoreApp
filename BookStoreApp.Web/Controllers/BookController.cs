@@ -18,13 +18,13 @@ public class BookController : Controller
     // GET: Book
     public ActionResult Index()
     {
-        return View(_repository.GetAllBooks());
+        return View(_repository.GetAll());
     }
 
     // GET: Book/Details/5
     public ActionResult Details(int id)
     {
-        return View(_repository.GetBookById(id));
+        return View(_repository.GetById(id));
     }
 
     // GET: Book/Create
@@ -40,7 +40,7 @@ public class BookController : Controller
     {
         try
         {
-            _repository.AddBook(model);
+            _repository.Add(model);
 
             return RedirectToAction(nameof(Index));
         }
@@ -63,7 +63,7 @@ public class BookController : Controller
     {
         try
         {
-            _repository.UpdateBook(model);
+            _repository.Update(model);
 
             return RedirectToAction(nameof(Index));
         }
@@ -86,7 +86,7 @@ public class BookController : Controller
     {
         try
         {
-            _repository.DeleteBook(id);
+            _repository.Delete(id);
 
             return RedirectToAction(nameof(Index));
         }

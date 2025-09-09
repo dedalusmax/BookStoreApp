@@ -2,15 +2,13 @@
 
 namespace BookStoreApp.Domain.Interfaces;
 
-public interface IBookRepository
+public interface IBookRepository : IRepository<Book>
 {
-    List<Book> GetAllBooks();
+    // add custom methods here if needed
 
-    Book? GetBookById(int id);
+    void Borrow(Book book);
 
-    void AddBook(Book book);
+    List<Book> GetAvailableBooks();
 
-    void UpdateBook(Book book);
-
-    void DeleteBook(int id);
+    List<Book> GetTopSellingBooks();
 }
