@@ -30,6 +30,8 @@ public class BookController : Controller
     // GET: Book/Create
     public ActionResult Create()
     {
+        ViewBag.Books = _repository.GetAllBooks();
+
         return View();
     }
 
