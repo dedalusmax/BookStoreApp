@@ -1,5 +1,6 @@
-using BookStoreApp.Data;
+﻿using BookStoreApp.Data;
 using BookStoreApp.Domain.Interfaces;
+using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,18 @@ else if (app.Environment.IsEnvironment("Testing"))
     Console.WriteLine("This is testing environment");
 }
 
+// prvi način
+
+//var connectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=Algebra;Trusted_Connection=true;";
+
+var connectionString = app.Configuration.GetConnectionString("DefaultConnection");
+var connection = new SqlConnection(connectionString);
+
+//await connection.OpenAsync();
+connection.Open();
+// TODO....
+connection.Close();
+connection.Dispose();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
