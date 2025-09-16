@@ -10,6 +10,24 @@ builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment())
+{
+    Console.WriteLine("This is development environment");
+}
+else if (app.Environment.IsStaging())
+{
+    Console.WriteLine("This is staging environment");
+}
+else if (app.Environment.IsProduction())
+{
+    Console.WriteLine("This is production environment");
+}
+else if (app.Environment.IsEnvironment("Testing"))
+{
+    Console.WriteLine("This is testing environment");
+}
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

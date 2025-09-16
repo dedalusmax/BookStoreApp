@@ -15,6 +15,8 @@ namespace BookStoreApp.Web.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogWarning("Index akcija se izvodi i jako je važno!");
+
             return View();
         }
 
