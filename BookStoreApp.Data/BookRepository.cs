@@ -1,59 +1,57 @@
 ﻿using BookStoreApp.Domain.Interfaces;
 using BookStoreApp.Domain.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace BookStoreApp.Data;
 
 public class BookRepository : IBookRepository
 {
-    // simulacija baze podataka
-    private static List<Book>? _books;
+    private readonly SqlConnection _connection;
 
-    public BookRepository()
+    public BookRepository(IConfiguration configuration)
     {
-        if (_books == null)
-        {
-            _books =
-            [
-                new() { Id = 1, Name = "Lord of the Rings", DateTimeBorrowed = DateTime.Today.AddDays(-3), IsBorrowed = true },
-                    new() { Id = 2, Name = "Hobbit", DateTimeBorrowed = DateTime.Today.AddDays(-1) },
-                    new() { Id = 3, Name = "Silmarillion", DateTimeBorrowed = DateTime.Today.AddDays(-2) }
-            ];
-        }
-    }
-
-    public List<Book> GetAllBooks()
-    {
-        return _books!;
-    }
-
-    public Book? GetBookById(int id)
-    {
-        return _books!.SingleOrDefault(x => x.Id == id);
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        _connection = new SqlConnection(connectionString);
     }
 
     public void AddBook(Book book)
     {
-        _books!.Add(book);
-    }
-
-    public void UpdateBook(Book book)
-    {
-        var data = _books!.SingleOrDefault(x => x.Id == book.Id);
-        if (data != null)
-        {
-            data.Name = book.Name;
-            data.Author = book.Author;
-            data.IsBorrowed = book.IsBorrowed;
-            data.DateTimeBorrowed = book.DateTimeBorrowed;
-        }
+        throw new NotImplementedException();
     }
 
     public void DeleteBook(int id)
     {
-        var data = _books!.SingleOrDefault(x => x.Id == id);
-        if (data != null)
-        {
-            _books!.Remove(data);
-        }
+        throw new NotImplementedException();
+    }
+
+    public List<Book> GetAllBooks()
+    {
+        return [];
+    }
+
+    public Book? GetBookById(int id)
+    {
+        var book = new Book();
+
+        _connection.Open();
+
+        using var command = new SqlCommand("SELECT * FROM Book WHERE BookId = @book_id;", _connection);
+        command.Parameters.AddWithValue("@book_id", id);
+
+        using var reader = command.ExecuteReader();
+        reader.Read();
+
+        book.Id = (int)reader["BookId"];
+        book.Name = (string)reader["Title"];
+
+        _connection.Close();    
+
+        return book;
+    }
+
+    public void UpdateBook(Book book)
+    {
+        throw new NotImplementedException();
     }
 }

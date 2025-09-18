@@ -8,4 +8,7 @@ public class Author
 
     [DisplayName("Autor knjige")]
     public string Name { get; set; }
+
+    [DisplayName("Biografija autora")]
+    public string Bio { get; set; }
 }
